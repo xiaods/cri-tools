@@ -20,5 +20,5 @@ package crictl
 
 const (
 	defaultConfigPath      = "/etc/crictl.yaml"
-	defaultRuntimeEndpoint = "unix:///var/run/dockershim.sock"
+	defaultRuntimeEndpoint = "unix:///run/k3s/containerd/containerd.sock"
 )
