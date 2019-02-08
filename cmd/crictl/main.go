@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package main
+package crictl
 
 import (
 	"fmt"
@@ -58,7 +58,7 @@ func getRuntimeClientConnection(context *cli.Context) (*grpc.ClientConn, error) 
 		return nil, err
 	}
 
-	conn, err := grpc.Dial(addr, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(Timeout), grpc.WithDialer(dialer))
+	conn, err := grpc.Dial(addr, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(Timeout), grpc.WithContextDialer(dialer))
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect, make sure you are running as root and the runtime has been started: %v", err)
 	}
@@ -78,7 +78,7 @@ func getImageClientConnection(context *cli.Context) (*grpc.ClientConn, error) {
 		return nil, err
 	}
 
-	conn, err := grpc.Dial(addr, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(Timeout), grpc.WithDialer(dialer))
+	conn, err := grpc.Dial(addr, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(Timeout), grpc.WithContextDialer(dialer))
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect, make sure you are running as root and the runtime has been started: %v", err)
 	}
@@ -89,7 +89,7 @@ func getRuntimeService(context *cli.Context) (internalapi.RuntimeService, error)
 	return remote.NewRemoteRuntimeService(RuntimeEndpoint, Timeout)
 }
 
-func main() {
+func Main() {
 	app := cli.NewApp()
 	app.Name = "crictl"
 	app.Usage = "client for CRI"
