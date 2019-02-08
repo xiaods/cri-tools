@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package main
+package crictl
 
 import (
 	"fmt"
@@ -88,7 +88,7 @@ func getRuntimeService(context *cli.Context) (cri.RuntimeService, error) {
 	return remote.NewRemoteRuntimeService(RuntimeEndpoint, Timeout)
 }
 
-func main() {
+func Main() {
 	app := cli.NewApp()
 	app.Name = "crictl"
 	app.Usage = "client for CRI"
